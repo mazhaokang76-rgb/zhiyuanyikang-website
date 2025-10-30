@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* 防止页面跳动和闪动 */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 确保平滑过渡 */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* 防止字体加载导致的闪动 */
+  html {
+    font-display: swap;
+    scroll-behavior: smooth;
+  }
+  
+  /* 全面的页面稳定性优化 */
+  body {
+    overflow-x: hidden; /* 防止水平滚动条导致的跳动 */
+    position: relative;
+  }
+  
+  /* 防止固定定位元素导致的跳动 */
+  [style*="position: fixed"],
+  [style*="position:fixed"] {
+    will-change: auto !important;
+    transform: translateZ(0); /* 开启硬件加速 */
+  }
+  
+  /* 优化悬浮按钮的稳定性 */
+  button[class*="fixed"] {
+    backface-visibility: hidden;
+    will-change: auto;
+    contain: layout style paint;
+  }
+  
+  /* 防止元素突然出现或消失导致的跳动 */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* 防止图像加载导致的布局跳动 */
+  img, video {
+    contain: layout;
+    vertical-align: top;
+  }
+  
+  /* 确保动画不影响布局 */
+  [class*="animate"] {
+    will-change: transform, opacity;
+    contain: layout;
+  }
+}
+
+/* Quill Editor Styles */
+.ql-editor {
+  font-family: inherit;
+}
+
+.ql-toolbar.ql-snow {
+  border-top: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  border-bottom: none;
+}
+
+.ql-container.ql-snow {
+  border-bottom: 1px solid #e5e7eb;
+  border-left: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+  border-top: none;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Custom scrollbars */
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f9fafb;
+}
+
+.scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-area::-webkit-scrollbar-track {
+  background: #f9fafb;
+  border-radius: 4px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Animation keyframes */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Focus styles */
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+/* Loading states */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* 隐藏托管平台水印 - 加强版 */
+div[style*="minimax"],
+div[style*="MINIMAX"],
+div[style*="MiniMax"],
+span[style*="minimax"],
+span[style*="MiniMax"],
+span[style*="MINIMAX"],
+a[style*="minimax"],
+a[style*="MiniMax"],
+a[style*="MINIMAX"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 隐藏特定的水印文本元素 - 安全版本 */
+body > div:last-child:not([id]):not([class]):not([role]) {
+  display: none !important;
+}
+
+/* 专门针对水印文本的隐藏 */
+div[style*="position: fixed"]:last-child,
+span[style*="position: fixed"]:last-child {
+  display: none !important;
+}
+
+/* 隐藏最后的DOM元素（通常是水印） */
+body > *:last-child:not([id]):not([class]):not(main):not(header):not(footer):not(nav):not(section) {
+  display: none !important;
+}
+
+/* 更广泛的水印隐藏规则 */
+[data-watermark],
+.watermark,
+#watermark,
+.powered-by,
+.footer-brand,
+.minimax-brand {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 针对可能的底部固定水印 */
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position:fixed"][style*="bottom"],
+div[style*="position: absolute"][style*="bottom"],
+div[style*="position:absolute"][style*="bottom"] {
+  display: none !important;
+}
+
+/* 隐藏可能的水印容器 */
+body > div:last-child:not([class]):not([id]),
+body > div:last-child[style*="position: fixed"],
+body > div:last-child[style*="position: absolute"] {
+  display: none !important;
+}
+
+/* 针对特定的水印样式特征 */
+div[style*="z-index"][style*="9999"],
+div[style*="z-index"][style*="999999"],
+div[style*="z-index"][style*="99999"] {
+  display: none !important;
+}
+
+/* 针对可能的右下角水印 */
+div[style*="right: 0"][style*="bottom: 0"],
+div[style*="right:0"][style*="bottom:0"],
+div[style*="right: 10px"][style*="bottom: 10px"] {
+  display: none !important;
+}
+
+/* 针对iframe中的水印 */
+iframe[src*="minimax"],
+iframe[src*="space.minimax.io"] {
+  display: none !important;
+}
+
+/* 针对特定的小字体水印 */
+div[style*="font-size: 12px"][style*="position: fixed"],
+div[style*="font-size:12px"][style*="position:fixed"],
+div[style*="font-size: 10px"][style*="position: absolute"],
+div[style*="font-size:10px"][style*="position:absolute"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 动态水印移除 - 隐藏所有可能的水印容器 */
+body > div:last-of-type:not([id]):not([class]):not([role]),
+body > div:last-of-type[style*="position"],
+body > span:last-of-type:not([id]):not([class]),
+body > a:last-of-type:not([id]):not([class]) {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 隐藏所有包含MiniMax或Agent的文本内容 */
+* {
+  -webkit-user-select: inherit;
+  -moz-user-select: inherit;
+  -ms-user-select: inherit;
+  user-select: inherit;
+}
+
+/* 使用CSS选择器隐藏可能的动态水印 */
+[data-watermark] *,
+[class*="watermark"] *,
+[id*="watermark"] *,
+[class*="agent"] *,
+[id*="agent"] *,
+[class*="minimax"] *,
+[id*="minimax"] * {
+  display: none !important;
+}
+
+/* 防止水印元素显示 */
+*[style*="z-index: 9999"],
+*[style*="z-index:9999"],
+*[style*="z-index: 99999"],
+*[style*="z-index:99999"] {
+  display: none !important;
+  visibility: hidden !important;
+}
