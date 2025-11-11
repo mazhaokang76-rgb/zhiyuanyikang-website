@@ -10,10 +10,10 @@
   "scripts": {
     "dev": "vite",
     "build:preview": "rm -rf node_modules/.vite-temp && tsc -b && vite build",
-    "build": "rm -rf node_modules/.vite-temp && tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "vercel-build": "npm run build"
+    "vercel-build": "vite build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
