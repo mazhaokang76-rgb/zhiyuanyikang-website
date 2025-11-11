@@ -9,7 +9,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build:preview": "rm -rf node_modules/.vite-temp && tsc -b && vite build",
+    "build:preview": "vite build",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
